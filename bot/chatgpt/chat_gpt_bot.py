@@ -22,9 +22,9 @@ class ChatGPTBot(Bot, OpenAIImage):
     def __init__(self):
         super().__init__()
         # set the default api_key
-        openai.api_key = conf().get("open_ai_api_key")
-        if conf().get("open_ai_api_base"):
-            openai.api_base = conf().get("open_ai_api_base")
+        openai.api_key = conf().get("fast_ai_api_key")
+        if conf().get("fast_ai_api_base"):
+            openai.api_base = conf().get("fast_ai_api_base")
         proxy = conf().get("proxy")
         if proxy:
             openai.proxy = proxy

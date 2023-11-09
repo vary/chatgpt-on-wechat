@@ -21,9 +21,9 @@ user_session = dict()
 class OpenAIBot(Bot, OpenAIImage):
     def __init__(self):
         super().__init__()
-        openai.api_key = conf().get("open_ai_api_key")
-        if conf().get("open_ai_api_base"):
-            openai.api_base = conf().get("open_ai_api_base")
+        openai.api_key = conf().get("fast_ai_api_key")
+        if conf().get("fast_ai_api_base"):
+            openai.api_base = conf().get("fast_ai_api_base")
         proxy = conf().get("proxy")
         if proxy:
             openai.proxy = proxy
@@ -47,6 +47,7 @@ class OpenAIBot(Bot, OpenAIImage):
             if context.type == ContextType.TEXT:
                 logger.info("[OPEN_AI] query={}".format(query))
                 session_id = context["session_id"]
+                self.args['chatId'] = session_id
                 reply = None
                 if query == "#清除记忆":
                     self.sessions.clear_session(session_id)
