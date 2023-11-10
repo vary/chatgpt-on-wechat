@@ -49,6 +49,12 @@ class ChatGPTBot(Bot, OpenAIImage):
             logger.info("[CHATGPT] query={}".format(query))
 
             session_id = context["session_id"]
+            self.args['chatId'] = session_id
+            variables = {
+                "chatId": session_id,
+                "user_nickname": context["user_nickname"]
+            }
+            self.args['variables'] = variables
             reply = None
             clear_memory_commands = conf().get("clear_memory_commands", ["#清除记忆"])
             if query in clear_memory_commands:
@@ -71,7 +77,6 @@ class ChatGPTBot(Bot, OpenAIImage):
             if model:
                 new_args = self.args.copy()
                 new_args["model"] = model
-                new_args['chatId'] = session_id
             # if context.get('stream'):
             #     # reply in stream
             #     return self.reply_text_stream(query, new_query, session_id)

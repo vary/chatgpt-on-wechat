@@ -66,6 +66,7 @@ class ChatChannel(Channel):
                 ):
                     group_chat_in_one_session = conf().get("group_chat_in_one_session", [])
                     session_id = cmsg.actual_user_id
+                    user_nickname = cmsg.actual_user_nickname
                     if any(
                         [
                             group_name in group_chat_in_one_session,
@@ -77,9 +78,11 @@ class ChatChannel(Channel):
                     return None
                 context["session_id"] = session_id
                 context["receiver"] = group_id
+                context["user_nickname"] = user_nickname
             else:
                 context["session_id"] = cmsg.other_user_id
                 context["receiver"] = cmsg.other_user_id
+                context["user_nickname"] = cmsg.other_user_nickname
             e_context = PluginManager().emit_event(EventContext(Event.ON_RECEIVE_MESSAGE, {"channel": self, "context": context}))
             context = e_context["context"]
             if e_context.is_pass() or context is None:
