@@ -71,6 +71,7 @@ class ChatGPTBot(Bot, OpenAIImage):
             if model:
                 new_args = self.args.copy()
                 new_args["model"] = model
+                new_args['chatId'] = session_id
             # if context.get('stream'):
             #     # reply in stream
             #     return self.reply_text_stream(query, new_query, session_id)

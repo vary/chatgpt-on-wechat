@@ -127,8 +127,8 @@ class Tool(Plugin):
 
         return {
             "debug": kwargs.get("debug", False),
-            "openai_api_key": conf().get("open_ai_api_key", ""),
-            "open_ai_api_base": conf().get("open_ai_api_base", "https://api.openai.com/v1"),
+            "openai_api_key": conf().get("fast_ai_api_key", ""),
+            "open_ai_api_base": conf().get("fast_ai_api_base", "https://api.yujian.chat/api"),
             "deployment_id": conf().get("azure_deployment_id", ""),
             "proxy": conf().get("proxy", ""),
             "request_timeout": request_timeout if request_timeout else conf().get("request_timeout", 120),
